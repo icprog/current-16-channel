@@ -52,7 +52,7 @@ AD_type AD_value[4][4];
 unsigned char flag_data=0,flag1=0;
 unsigned char work_enable=0;
 unsigned char capture_enable=0;
-unsigned char MAIN_ID=16;
+unsigned char MAIN_ID=17;
 
 int count_reset = 0; 
 
@@ -86,10 +86,18 @@ void UART1_Send(unsigned char str[], int len)
 	}
 }
 
+unsigned int Tick_sys = 0;
 void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 {
 	IFS2bits.T6IF = 0;
-	Tick_60S++;		
+	Tick_60S++;	
+	Tick_sys++;	
+
+	if(Tick_sys >= 1000)
+	{
+		Tick_sys = 0;
+		FAIL = ~FAIL;
+	}
 
     if(Tick_60S % 100 == 1)
     {
@@ -138,7 +146,7 @@ void __attribute__((interrupt,no_auto_psv)) _U1RXInterrupt(void)
 		UART_Timeout = 0;
 	}
 	
-	if( (i==16)&&(data[2]==0X03)&&(data[3]==0X04)&&(data[0]='S') )
+	if( (i==16)&&(data[2]==0X03)&&(data[3]==0X04)&&(data[0]=='S') )
 	{	
 			count_reset = 0;
 		    flag_ascii_or_bin = 'b';
@@ -290,9 +298,14 @@ int main()
     TRISCbits.TRISC13 = 0;
     TRISDbits.TRISD0 = 0;
     TRISFbits.TRISF6 = 0; 
+	TRISCbits.TRISC14 = 0; 
+	TRISDbits.TRISD11 = 0;
+
     Nrest=1;
     WORK = 1;
+	FAIL = 1;
     STAT = 0;
+	COMM = 0;
 
 	CLRWDT
  
@@ -397,6 +410,7 @@ int main()
         	}	
             
 			STAT = ~STAT;
+			COMM = ~COMM;
 			work_enable = 0;
         }      
     }    
