@@ -58,7 +58,7 @@ int count_reset = 0;
 
 unsigned char send_data[200]={1,2,3,4,5,6,7,8,9,10};
 char send_ascii[250];
-char flag_ascii_or_bin = 'a';
+char flag_ascii_or_bin = 'b';
 
  
 unsigned int Tick_60S=0; // 用来记录定时中断次数
@@ -109,6 +109,13 @@ void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 	{
 		Tick_60S = 0;
 		count_reset ++;
+	}
+	if(count_reset == 31)
+	{
+		InitSCI();
+		work_enable = 1;
+		uart1_enable = 1;
+		uart2_enable = 1;
 	}
 	if(count_reset >= 35)
 	{
