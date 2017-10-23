@@ -123,6 +123,8 @@ unsigned char  read_write_byte(unsigned char data)
 	
 	while(!SPI2STATbits.SPIRBF){asm("nop");}
 	temp= SPI2BUF;
+
+	SPI2STATbits.SPIROV = 0; //clear overflow
 	return temp;
 }
 

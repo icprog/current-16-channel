@@ -97,6 +97,7 @@ void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 	{
 		Tick_sys = 0;
 		FAIL = ~FAIL;
+		WORK = FAIL;
 	}
 
     if(Tick_60S % 100 == 1)
@@ -109,12 +110,20 @@ void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 		Tick_60S = 0;
 		count_reset ++;
 	}
-	if(count_reset >= 30)
+	if(count_reset >= 35)
 	{
 		Nrest=0;
 		DELAY(1000);
 		Nrest=1;
 		count_reset = 0;
+			IEC1bits.U2RXIE = 0; // Enable UART2 RX interrupt
+            IEC1bits.U2TXIE = 0;
+			IEC0bits.U1RXIE = 0; //  Enable UART1 RX interrupt
+			IEC0bits.U1TXIE = 0;
+			IEC2bits.T6IE = 0;
+			IEC2bits.C1IE=0;
+			C1INTEbits.RBIE=0;
+			while(1); //饿狗，让狗来重启
 	} 		
 }
 
@@ -148,7 +157,6 @@ void __attribute__((interrupt,no_auto_psv)) _U1RXInterrupt(void)
 	
 	if( (i==16)&&(data[2]==0X03)&&(data[3]==0X04)&&(data[0]=='S') )
 	{	
-			count_reset = 0;
 		    flag_ascii_or_bin = 'b';
 			work_enable = 1;//握手指令中的ID与箱号一致时，才会开启该采集箱激频拾频
 			uart1_enable =1;
@@ -314,11 +322,24 @@ int main()
 	while(1)
 	{
 		CLRWDT
-
+		
+		if((U1STA & 0x000E) != 0x0000)
+		{
+			read_temp = U1RXREG;
+			U1STAbits.OERR = 0;
+        }
+		
+		if((U2STA & 0x000E) != 0x0000)
+		{
+			read_temp = U2RXREG;
+			U2STAbits.OERR = 0;
+        }
+		
 		if(capture_enable)
 		{
 			for(i = 0;i < 4;i ++)
 			{
+				wait = 0;
 				while((!(check(i)&0x80)) && (wait < 80))
 				{wait ++;}
 
@@ -412,6 +433,7 @@ int main()
 			STAT = ~STAT;
 			COMM = ~COMM;
 			work_enable = 0;
+			count_reset = 0;
         }      
     }    
 	return 0;
