@@ -60,8 +60,7 @@ unsigned char send_data[200]={1,2,3,4,5,6,7,8,9,10};
 char send_ascii[250];
 char flag_ascii_or_bin = 'b';
 
- 
-unsigned int Tick_60S=0; // 用来记录定时中断次数
+unsigned int Tick_1S=0;
 
 unsigned char uart2_enable = 0;//串口使能位
 unsigned char uart1_enable = 0;//网口使能位
@@ -90,7 +89,6 @@ unsigned int Tick_sys = 0;
 void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 {
 	IFS2bits.T6IF = 0;
-	Tick_60S++;	
 	Tick_sys++;	
 
 	if(Tick_sys >= 1000)
@@ -98,29 +96,17 @@ void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 		Tick_sys = 0;
 		FAIL = ~FAIL;
 		WORK = FAIL;
+	    Tick_1S ++;
 	}
 
-    if(Tick_60S % 100 == 1)
+    if(Tick_sys % 100 == 1)
     {
 		capture_enable = 1;
 	}
 
-	if(Tick_60S >= 64000)
+	if(Tick_1S >= 1920) //32min
 	{
-		Tick_60S = 0;
-		count_reset ++;
-	}
-	if(count_reset == 31)
-	{
-		InitSCI();
-		work_enable = 1;
-		uart1_enable = 1;
-		uart2_enable = 1;
-	}
-	if(count_reset >= 35)
-	{
-		Nrest=0;
-		DELAY(1000);
+		Tick_1S = 0;
 		Nrest=1;
 		count_reset = 0;
 			IEC1bits.U2RXIE = 0; // Enable UART2 RX interrupt
@@ -131,7 +117,22 @@ void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 			IEC2bits.C1IE=0;
 			C1INTEbits.RBIE=0;
 			while(1); //饿狗，让狗来重启
-	} 		
+	}
+
+	else if(Tick_1S == 1918)
+	{
+		Nrest=0;
+	}
+
+	else if(Tick_1S == 1860)
+	{
+		SPI_Init();
+		InitSCI();
+		work_enable = 1;
+		uart1_enable = 1;
+		uart2_enable = 1;
+	}
+ 		
 }
 
 /******
@@ -166,8 +167,7 @@ void __attribute__((interrupt,no_auto_psv)) _U1RXInterrupt(void)
 	{	
 		    flag_ascii_or_bin = 'b';
 			work_enable = 1;//握手指令中的ID与箱号一致时，才会开启该采集箱激频拾频
-			uart1_enable =1;
-			Tick_60S=0;			
+			uart1_enable =1;		
 	}//if(i==16)
 	return;	
 }//
@@ -290,7 +290,7 @@ int main()
 {
 	int i;
 	int k,j;
-	int n,m;
+	int n,m,p;
 	int s=0;
 	int temp1;
     unsigned int humi_val_i,temp_val_i;
@@ -299,6 +299,10 @@ int main()
     unsigned char adc_temp[3];
     unsigned char test[7] = {0x55,0x55,0x55,'t','e','s','t'};
 	unsigned int wait;
+	unsigned int channel_flag[4] = {0,0,0,0};
+	unsigned int sum = 0;
+	unsigned int count = 0;
+
     CLRWDT
 	OSCCON = 0x2200;
 
@@ -368,7 +372,6 @@ int main()
 						AD_buffer[i][flag_data].AD_2=adc_temp[1];
 						AD_buffer[i][flag_data].AD_1=adc_temp[0];
 						AD_buffer[i][flag_data].AD_4=0;	
-						Tick_60S = 0;
 					}
 					//AD_value[0].AD_value= AD_value[0].AD_value*0.9f+AD_buffer[0].AD_value*0.1f;
 	        	
@@ -441,6 +444,7 @@ int main()
 			COMM = ~COMM;
 			work_enable = 0;
 			count_reset = 0;
+			Tick_1S = 0;
         }      
     }    
 	return 0;
