@@ -52,9 +52,7 @@ AD_type AD_value[4][4];
 unsigned char flag_data=0,flag1=0;
 unsigned char work_enable=0;
 unsigned char capture_enable=0;
-unsigned char MAIN_ID=17;
-
-int count_reset = 0; 
+unsigned char MAIN_ID=17; 
 
 unsigned char send_data[200]={1,2,3,4,5,6,7,8,9,10};
 char send_ascii[250];
@@ -108,7 +106,6 @@ void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 	{
 		Tick_1S = 0;
 		Nrest=1;
-		count_reset = 0;
 			IEC1bits.U2RXIE = 0; // Enable UART2 RX interrupt
             IEC1bits.U2TXIE = 0;
 			IEC0bits.U1RXIE = 0; //  Enable UART1 RX interrupt
@@ -350,14 +347,20 @@ int main()
 		{
 			for(i = 0;i < 4;i ++)
 			{
-				wait = 0;
-				while((!(check(i)&0x80)) && (wait < 80))
-				{wait ++;}
+				//wait = 0;
+				//while((!(check(i)&0x80)) && (wait < 80))
+				//{wait ++;}
 
 				cs_low(i);
                 DELAY(50);
 
-	
+				//sum = 0;
+                //channel_flag[0] = 0;
+                //channel_flag[1] = 0;
+                //channel_flag[2] = 0;
+                //channel_flag[3] = 0;
+
+				//do{
 					read_write_byte(0x44);
 
 					adc_temp[2]=read_write_byte(0x00); 
@@ -372,9 +375,12 @@ int main()
 						AD_buffer[i][flag_data].AD_2=adc_temp[1];
 						AD_buffer[i][flag_data].AD_1=adc_temp[0];
 						AD_buffer[i][flag_data].AD_4=0;	
+						channel_flag[flag_data] = 1;
 					}
-					//AD_value[0].AD_value= AD_value[0].AD_value*0.9f+AD_buffer[0].AD_value*0.1f;
-	        	
+				//	sum = channel_flag[0] + channel_flag[1] + channel_flag[2] + channel_flag[3];
+	   			
+				//}while(sum < 4);
+     	
 				cs_high(i);
 				DELAY(50); 
 				CLRWDT
@@ -435,15 +441,13 @@ int main()
 			{
 				UART2_Send(send_data,s);
 			}
-			if(uart1_enable ==1)
-        	{
-        		UART1_Send(send_data,s);
-        	}	
+			uart2_enable = 0;
+
+        	UART1_Send(send_data,s);	
             
 			STAT = ~STAT;
 			COMM = ~COMM;
 			work_enable = 0;
-			count_reset = 0;
 			Tick_1S = 0;
         }      
     }    

@@ -148,7 +148,7 @@ void AD7176set(void)
 		cs_low(i);
         DELAY(100); 
 		read_write_byte(0x01);
-		read_write_byte(0x07);   
+		read_write_byte(0x01);   
 		read_write_byte(0x08);
 		cs_high(i);
 		DELAY(100); 
@@ -349,11 +349,11 @@ unsigned char check(int i)
 	unsigned char flag;
 	
 	cs_low(i);
-DELAY(50);
+	DELAY(50);
 	read_write_byte(0x40);
 	flag=read_write_byte(0x00);
 	cs_high(i);
-DELAY(50);
+	DELAY(50);
 	
 	return flag;
 } 
