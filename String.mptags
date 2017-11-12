@@ -39,7 +39,7 @@ MAIN_ID	C:\Users\zwq\Desktop\currentnew\main.c	55;"	v	line:55
 MEASURE_HUMI::0x05	C:\Users\zwq\Desktop\currentnew\collect.h	42;"	d	line:42
 MEASURE_TEMP::0x03	C:\Users\zwq\Desktop\currentnew\collect.h	41;"	d	line:41
 Nrest::LATFbits.LATF6	C:\Users\zwq\Desktop\currentnew\main.c	27;"	d	line:27	file:
-OSCCON	C:\Users\zwq\Desktop\currentnew\main.c	303;"	l	line:303
+OSCCON	C:\Users\zwq\Desktop\currentnew\main.c	304;"	l	line:304
 RESET::0x1e	C:\Users\zwq\Desktop\currentnew\collect.h	43;"	d	line:43
 SCK::PORTGbits.RG2	C:\Users\zwq\Desktop\currentnew\collect.h	22;"	d	line:22
 SPI_Init	C:\Users\zwq\Desktop\currentnew\AD7176.c	76;"	f	line:76
@@ -60,74 +60,76 @@ T2	C:\Users\zwq\Desktop\currentnew\collect.c	307;"	l	line:307
 TEMP	C:\Users\zwq\Desktop\currentnew\collect.h	34;"	e	line:34
 TRIS_DATA::TRISGbits.TRISG3	C:\Users\zwq\Desktop\currentnew\collect.h	21;"	d	line:21
 TRIS_SCK::TRISGbits.TRISG2	C:\Users\zwq\Desktop\currentnew\collect.h	23;"	d	line:23
-Tick_1S	C:\Users\zwq\Desktop\currentnew\main.c	63;"	v	line:63
-Tick_sys	C:\Users\zwq\Desktop\currentnew\main.c	88;"	v	line:88
-UART1_Send	C:\Users\zwq\Desktop\currentnew\main.c	78;"	f	line:78	signature:(unsigned char str[], int len)
-UART2_Send	C:\Users\zwq\Desktop\currentnew\main.c	68;"	f	line:68	signature:(unsigned char str[], int len)
-UART_Timeout	C:\Users\zwq\Desktop\currentnew\main.c	146;"	l	line:146
-UART_Timeout	C:\Users\zwq\Desktop\currentnew\main.c	188;"	l	line:188
+Tick_1S	C:\Users\zwq\Desktop\currentnew\main.c	61;"	v	line:61
+Tick_sys	C:\Users\zwq\Desktop\currentnew\main.c	86;"	v	line:86
+UART1_Send	C:\Users\zwq\Desktop\currentnew\main.c	76;"	f	line:76	signature:(unsigned char str[], int len)
+UART2_Send	C:\Users\zwq\Desktop\currentnew\main.c	66;"	f	line:66	signature:(unsigned char str[], int len)
+UART_Timeout	C:\Users\zwq\Desktop\currentnew\main.c	143;"	l	line:143
+UART_Timeout	C:\Users\zwq\Desktop\currentnew\main.c	185;"	l	line:185
 WORK::LATCbits.LATC13	C:\Users\zwq\Desktop\currentnew\main.c	24;"	d	line:24	file:
-_T6Interrupt	C:\Users\zwq\Desktop\currentnew\main.c	89;"	f	line:89	signature:(void)
-_U1RXInterrupt	C:\Users\zwq\Desktop\currentnew\main.c	142;"	f	line:142	signature:(void)
-_U2RXInterrupt	C:\Users\zwq\Desktop\currentnew\main.c	186;"	f	line:186	signature:(void)
+_T6Interrupt	C:\Users\zwq\Desktop\currentnew\main.c	87;"	f	line:87	signature:(void)
+_U1RXInterrupt	C:\Users\zwq\Desktop\currentnew\main.c	139;"	f	line:139	signature:(void)
+_U2RXInterrupt	C:\Users\zwq\Desktop\currentnew\main.c	183;"	f	line:183	signature:(void)
 _collect_h	C:\Users\zwq\Desktop\currentnew\collect.h	2;"	d	line:2
-adc_temp	C:\Users\zwq\Desktop\currentnew\main.c	299;"	l	line:299
+adc_temp	C:\Users\zwq\Desktop\currentnew\main.c	296;"	l	line:296
 calc_sth11	C:\Users\zwq\Desktop\currentnew\collect.c	301;"	f	line:301	signature:(float *p_humidity ,float *p_temperature)
 calc_sth11	C:\Users\zwq\Desktop\currentnew\collect.h	53;"	p	line:53	signature:(float *p_humidity ,float *p_temperature)
 capture_enable	C:\Users\zwq\Desktop\currentnew\main.c	54;"	v	line:54
+channel_flag	C:\Users\zwq\Desktop\currentnew\main.c	299;"	l	line:299
 check	C:\Users\zwq\Desktop\currentnew\AD7176.c	347;"	f	line:347	signature:(int i)
 check	C:\Users\zwq\Desktop\currentnew\AD7176.h	66;"	p	line:66	signature:(int i)
-checksum	C:\Users\zwq\Desktop\currentnew\main.c	297;"	l	line:297
-count_reset	C:\Users\zwq\Desktop\currentnew\main.c	57;"	v	line:57
+checksum	C:\Users\zwq\Desktop\currentnew\main.c	294;"	l	line:294
+count	C:\Users\zwq\Desktop\currentnew\main.c	301;"	l	line:301
 cs_high	C:\Users\zwq\Desktop\currentnew\AD7176.c	389;"	f	line:389	signature:(int num)
 cs_high	C:\Users\zwq\Desktop\currentnew\AD7176.h	68;"	p	line:68	signature:(int num)
 cs_low	C:\Users\zwq\Desktop\currentnew\AD7176.c	361;"	f	line:361	signature:(int num)
 cs_low	C:\Users\zwq\Desktop\currentnew\AD7176.h	67;"	p	line:67	signature:(int num)
 d_h	C:\Users\zwq\Desktop\currentnew\collect.c	254;"	l	line:254
 d_l	C:\Users\zwq\Desktop\currentnew\collect.c	254;"	l	line:254
-dat	C:\Users\zwq\Desktop\currentnew\main.c	190;"	l	line:190
-data	C:\Users\zwq\Desktop\currentnew\main.c	145;"	l	line:145
+dat	C:\Users\zwq\Desktop\currentnew\main.c	187;"	l	line:187
+data	C:\Users\zwq\Desktop\currentnew\main.c	142;"	l	line:142
 error	C:\Users\zwq\Desktop\currentnew\collect.c	109;"	l	line:109
 error	C:\Users\zwq\Desktop\currentnew\collect.c	220;"	l	line:220
 error	C:\Users\zwq\Desktop\currentnew\collect.c	235;"	l	line:235
 error	C:\Users\zwq\Desktop\currentnew\collect.c	245;"	l	line:245
 error	C:\Users\zwq\Desktop\currentnew\collect.c	255;"	l	line:255
-error	C:\Users\zwq\Desktop\currentnew\main.c	297;"	l	line:297
+error	C:\Users\zwq\Desktop\currentnew\main.c	294;"	l	line:294
 flag	C:\Users\zwq\Desktop\currentnew\AD7176.c	349;"	l	line:349
 flag1	C:\Users\zwq\Desktop\currentnew\main.c	52;"	v	line:52
-flag_ascii_or_bin	C:\Users\zwq\Desktop\currentnew\main.c	61;"	v	line:61
+flag_ascii_or_bin	C:\Users\zwq\Desktop\currentnew\main.c	59;"	v	line:59
 flag_data	C:\Users\zwq\Desktop\currentnew\main.c	52;"	v	line:52
-humi_val_i	C:\Users\zwq\Desktop\currentnew\main.c	296;"	l	line:296
+humi_val_i	C:\Users\zwq\Desktop\currentnew\main.c	293;"	l	line:293
 i	C:\Users\zwq\Desktop\currentnew\AD7176.c	134;"	l	line:134
 i	C:\Users\zwq\Desktop\currentnew\AD7176.c	419;"	l	line:419
 i	C:\Users\zwq\Desktop\currentnew\collect.c	109;"	l	line:109
 i	C:\Users\zwq\Desktop\currentnew\collect.c	163;"	l	line:163
 i	C:\Users\zwq\Desktop\currentnew\collect.c	256;"	l	line:256
 i	C:\Users\zwq\Desktop\currentnew\collect.c	78;"	l	line:78
-i	C:\Users\zwq\Desktop\currentnew\main.c	147;"	l	line:147
-i	C:\Users\zwq\Desktop\currentnew\main.c	189;"	l	line:189
-i	C:\Users\zwq\Desktop\currentnew\main.c	291;"	l	line:291
-i	C:\Users\zwq\Desktop\currentnew\main.c	70;"	l	line:70
-i	C:\Users\zwq\Desktop\currentnew\main.c	80;"	l	line:80
+i	C:\Users\zwq\Desktop\currentnew\main.c	144;"	l	line:144
+i	C:\Users\zwq\Desktop\currentnew\main.c	186;"	l	line:186
+i	C:\Users\zwq\Desktop\currentnew\main.c	288;"	l	line:288
+i	C:\Users\zwq\Desktop\currentnew\main.c	68;"	l	line:68
+i	C:\Users\zwq\Desktop\currentnew\main.c	78;"	l	line:78
 j	C:\Users\zwq\Desktop\currentnew\AD7176.c	419;"	l	line:419
-j	C:\Users\zwq\Desktop\currentnew\main.c	292;"	l	line:292
-k	C:\Users\zwq\Desktop\currentnew\main.c	292;"	l	line:292
-m	C:\Users\zwq\Desktop\currentnew\main.c	293;"	l	line:293
-main	C:\Users\zwq\Desktop\currentnew\main.c	289;"	f	line:289
-n	C:\Users\zwq\Desktop\currentnew\main.c	293;"	l	line:293
+j	C:\Users\zwq\Desktop\currentnew\main.c	289;"	l	line:289
+k	C:\Users\zwq\Desktop\currentnew\main.c	289;"	l	line:289
+m	C:\Users\zwq\Desktop\currentnew\main.c	290;"	l	line:290
+main	C:\Users\zwq\Desktop\currentnew\main.c	286;"	f	line:286
+n	C:\Users\zwq\Desktop\currentnew\main.c	290;"	l	line:290
 nSS1::LATGbits.LATG15	C:\Users\zwq\Desktop\currentnew\AD7176.h	57;"	d	line:57
 nSS2::LATCbits.LATC1	C:\Users\zwq\Desktop\currentnew\AD7176.h	58;"	d	line:58
 nSS3::LATDbits.LATD5	C:\Users\zwq\Desktop\currentnew\AD7176.h	59;"	d	line:59
 nSS4::LATDbits.LATD4	C:\Users\zwq\Desktop\currentnew\AD7176.h	60;"	d	line:60
 noACK::0	C:\Users\zwq\Desktop\currentnew\collect.h	32;"	d	line:32
-read_temp	C:\Users\zwq\Desktop\currentnew\main.c	298;"	l	line:298
+p	C:\Users\zwq\Desktop\currentnew\main.c	290;"	l	line:290
+read_temp	C:\Users\zwq\Desktop\currentnew\main.c	295;"	l	line:295
 read_write_byte	C:\Users\zwq\Desktop\currentnew\AD7176.c	115;"	f	line:115	signature:(unsigned char data)
 read_write_byte	C:\Users\zwq\Desktop\currentnew\AD7176.h	64;"	p	line:64	signature:(unsigned char data)
-receive_buf	C:\Users\zwq\Desktop\currentnew\main.c	191;"	l	line:191
+receive_buf	C:\Users\zwq\Desktop\currentnew\main.c	188;"	l	line:188
 rh	C:\Users\zwq\Desktop\currentnew\collect.c	308;"	l	line:308
 rh_lin	C:\Users\zwq\Desktop\currentnew\collect.c	310;"	l	line:310
 rh_true	C:\Users\zwq\Desktop\currentnew\collect.c	311;"	l	line:311
-s	C:\Users\zwq\Desktop\currentnew\main.c	294;"	l	line:294
+s	C:\Users\zwq\Desktop\currentnew\main.c	291;"	l	line:291
 s_connectionreset	C:\Users\zwq\Desktop\currentnew\collect.c	76;"	f	line:76	signature:(void)
 s_connectionreset	C:\Users\zwq\Desktop\currentnew\collect.h	48;"	p	line:48	signature:(void)
 s_measure	C:\Users\zwq\Desktop\currentnew\collect.c	252;"	f	line:252	signature:(unsigned char *p_value, unsigned char *p_checksum, unsigned char mode)
@@ -144,17 +146,18 @@ s_write_byte	C:\Users\zwq\Desktop\currentnew\collect.c	107;"	f	line:107	signatur
 s_write_byte	C:\Users\zwq\Desktop\currentnew\collect.h	45;"	p	line:45	signature:(unsigned char value)
 s_write_statusreg	C:\Users\zwq\Desktop\currentnew\collect.c	243;"	f	line:243	signature:(unsigned char *p_value)
 s_write_statusreg	C:\Users\zwq\Desktop\currentnew\collect.h	51;"	p	line:51	signature:(unsigned char *p_value)
-send_ascii	C:\Users\zwq\Desktop\currentnew\main.c	60;"	v	line:60
-send_data	C:\Users\zwq\Desktop\currentnew\main.c	59;"	v	line:59
-start_judge	C:\Users\zwq\Desktop\currentnew\main.c	184;"	v	line:184
+send_ascii	C:\Users\zwq\Desktop\currentnew\main.c	58;"	v	line:58
+send_data	C:\Users\zwq\Desktop\currentnew\main.c	57;"	v	line:57
+start_judge	C:\Users\zwq\Desktop\currentnew\main.c	181;"	v	line:181
+sum	C:\Users\zwq\Desktop\currentnew\main.c	300;"	l	line:300
 t	C:\Users\zwq\Desktop\currentnew\collect.c	309;"	l	line:309
 t_C	C:\Users\zwq\Desktop\currentnew\collect.c	312;"	l	line:312
 temp	C:\Users\zwq\Desktop\currentnew\AD7176.c	117;"	l	line:117
-temp1	C:\Users\zwq\Desktop\currentnew\main.c	295;"	l	line:295
-temp_val_i	C:\Users\zwq\Desktop\currentnew\main.c	296;"	l	line:296
-test	C:\Users\zwq\Desktop\currentnew\main.c	300;"	l	line:300
-uart1_enable	C:\Users\zwq\Desktop\currentnew\main.c	66;"	v	line:66
-uart2_enable	C:\Users\zwq\Desktop\currentnew\main.c	65;"	v	line:65
+temp1	C:\Users\zwq\Desktop\currentnew\main.c	292;"	l	line:292
+temp_val_i	C:\Users\zwq\Desktop\currentnew\main.c	293;"	l	line:293
+test	C:\Users\zwq\Desktop\currentnew\main.c	297;"	l	line:297
+uart1_enable	C:\Users\zwq\Desktop\currentnew\main.c	64;"	v	line:64
+uart2_enable	C:\Users\zwq\Desktop\currentnew\main.c	63;"	v	line:63
 val	C:\Users\zwq\Desktop\currentnew\collect.c	163;"	l	line:163
-wait	C:\Users\zwq\Desktop\currentnew\main.c	301;"	l	line:301
+wait	C:\Users\zwq\Desktop\currentnew\main.c	298;"	l	line:298
 work_enable	C:\Users\zwq\Desktop\currentnew\main.c	53;"	v	line:53

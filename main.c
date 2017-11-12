@@ -58,7 +58,7 @@ unsigned char send_data[200]={1,2,3,4,5,6,7,8,9,10};
 char send_ascii[250];
 char flag_ascii_or_bin = 'b';
 
-unsigned int Tick_1S=0;
+volatile unsigned int Tick_1S=0;
 
 unsigned char uart2_enable = 0;//串口使能位
 unsigned char uart1_enable = 0;//网口使能位
@@ -97,7 +97,7 @@ void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 	    Tick_1S ++;
 	}
 
-    if(Tick_sys % 100 == 1)
+    if(Tick_sys % 123 == 1)
     {
 		capture_enable = 1;
 	}
@@ -123,7 +123,6 @@ void __attribute__((interrupt,no_auto_psv)) _T6Interrupt(void)  // 1ms interrupt
 
 	else if(Tick_1S == 1860)
 	{
-		SPI_Init();
 		InitSCI();
 		work_enable = 1;
 		uart1_enable = 1;
@@ -298,7 +297,7 @@ int main()
 	unsigned int wait;
 	unsigned int channel_flag[4] = {0,0,0,0};
 	unsigned int sum = 0;
-	unsigned int count = 0;
+	unsigned int flag_break = 0;
 
     CLRWDT
 	OSCCON = 0x2200;
@@ -316,6 +315,9 @@ int main()
     TRISFbits.TRISF6 = 0; 
 	TRISCbits.TRISC14 = 0; 
 	TRISDbits.TRISD11 = 0;
+
+    AD1PCFGLbits.PCFG7 = 1;
+    AD2PCFGLbits.PCFG7 = 1;
 
     Nrest=1;
     WORK = 1;
@@ -347,12 +349,21 @@ int main()
 		{
 			for(i = 0;i < 4;i ++)
 			{
-				//wait = 0;
-				//while((!(check(i)&0x80)) && (wait < 80))
-				//{wait ++;}
 
 				cs_low(i);
                 DELAY(50);
+
+				/*wait = Tick_1S;
+				flag_break = 0;
+				while(PORTGbits.RG7) 
+				{
+					if((wait + 2 <= Tick_1S)||(Tick_1S < wait))
+					{
+						flag_break = 1;
+						break;
+					}
+				}
+				if(flag_break == 1) break;*/
 
 				//sum = 0;
                 //channel_flag[0] = 0;
@@ -371,11 +382,14 @@ int main()
 					if(!(flag_data&0x80)) //有数据转化成功
 					{
 						flag_data = flag_data&0x03;////通道0 返回通道号 
-						AD_buffer[i][flag_data].AD_3=adc_temp[2]; 
-						AD_buffer[i][flag_data].AD_2=adc_temp[1];
-						AD_buffer[i][flag_data].AD_1=adc_temp[0];
-						AD_buffer[i][flag_data].AD_4=0;	
-						channel_flag[flag_data] = 1;
+						if(adc_temp[0] != 0 && adc_temp[1] != 0 && adc_temp[2] != 0)
+						{
+							AD_buffer[i][flag_data].AD_3=adc_temp[2]; 
+							AD_buffer[i][flag_data].AD_2=adc_temp[1];
+							AD_buffer[i][flag_data].AD_1=adc_temp[0];
+							AD_buffer[i][flag_data].AD_4=0;
+                         //	channel_flag[flag_data] = 1;
+						}	
 					}
 				//	sum = channel_flag[0] + channel_flag[1] + channel_flag[2] + channel_flag[3];
 	   			
