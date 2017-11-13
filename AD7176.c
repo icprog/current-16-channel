@@ -149,7 +149,7 @@ void AD7176set(void)
         DELAY(100); 
 		read_write_byte(0x01);
 		read_write_byte(0x01);   
-		read_write_byte(0x08);
+		read_write_byte(0x18);
 		cs_high(i);
 		DELAY(100); 
 	}
@@ -220,7 +220,7 @@ void AD7176set(void)
 		cs_low(i);
         DELAY(100); 
 		read_write_byte(0x10);
-		read_write_byte(0x80);
+		read_write_byte(0x00);
 		read_write_byte(0x16);
 		cs_high(i);
 		DELAY(100); 
@@ -240,7 +240,7 @@ void AD7176set(void)
 		cs_low(i);
         DELAY(100); 
 		read_write_byte(0x11);
-		read_write_byte(0x80);
+		read_write_byte(0x00);
 		read_write_byte(0x36);
 		cs_high(i);
 		DELAY(100); 
@@ -260,7 +260,7 @@ void AD7176set(void)
 		cs_low(i);
         DELAY(100); 
 		read_write_byte(0x12);
-		read_write_byte(0x80);
+		read_write_byte(0x00);
 		read_write_byte(0x56);
 		cs_high(i);
 		DELAY(100); 
@@ -280,7 +280,7 @@ void AD7176set(void)
 		cs_low(i);
         DELAY(100); 
 		read_write_byte(0x13);
-		read_write_byte(0x80);
+		read_write_byte(0x00);
 		read_write_byte(0x76);
 		cs_high(i);
 		DELAY(100); 

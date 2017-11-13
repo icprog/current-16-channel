@@ -295,8 +295,6 @@ int main()
     unsigned char adc_temp[3];
     unsigned char test[7] = {0x55,0x55,0x55,'t','e','s','t'};
 	unsigned int wait;
-	unsigned int channel_flag[4] = {0,0,0,0};
-	unsigned int sum = 0;
 	unsigned int flag_break = 0;
 
     CLRWDT
@@ -347,31 +345,31 @@ int main()
 		
 		if(capture_enable)
 		{
-			for(i = 0;i < 4;i ++)
+			for(p = 0;p < 4;p ++)
 			{
-
-				cs_low(i);
-                DELAY(50);
-
-				/*wait = Tick_1S;
-				flag_break = 0;
-				while(PORTGbits.RG7) 
+				for(i = 0;i < 4;i ++)
 				{
-					if((wait + 2 <= Tick_1S)||(Tick_1S < wait))
-					{
-						flag_break = 1;
-						break;
-					}
+					cs_low(i);
+			        DELAY(100); 
+					read_write_byte(0x10 + p);
+					read_write_byte(0x80);
+					read_write_byte(0x20 * p + 0x16);
+					cs_high(i);
+					DELAY(100); 
 				}
-				if(flag_break == 1) break;*/
+				DELAY(1000);
 
-				//sum = 0;
-                //channel_flag[0] = 0;
-                //channel_flag[1] = 0;
-                //channel_flag[2] = 0;
-                //channel_flag[3] = 0;
+				for(i = 0;i < 4;i ++)
+				{
+					cs_low(i);
+	                DELAY(100);
 
-				//do{
+					read_write_byte(0x01);
+					read_write_byte(0x01);   
+					read_write_byte(0x18);
+
+					DELAY(9000);
+
 					read_write_byte(0x44);
 
 					adc_temp[2]=read_write_byte(0x00); 
@@ -382,22 +380,33 @@ int main()
 					if(!(flag_data&0x80)) //有数据转化成功
 					{
 						flag_data = flag_data&0x03;////通道0 返回通道号 
-						if(adc_temp[0] != 0 && adc_temp[1] != 0 && adc_temp[2] != 0)
+						//if(adc_temp[0] != 0 && adc_temp[1] != 0 && adc_temp[2] != 0)
 						{
 							AD_buffer[i][flag_data].AD_3=adc_temp[2]; 
 							AD_buffer[i][flag_data].AD_2=adc_temp[1];
 							AD_buffer[i][flag_data].AD_1=adc_temp[0];
 							AD_buffer[i][flag_data].AD_4=0;
-                         //	channel_flag[flag_data] = 1;
 						}	
 					}
-				//	sum = channel_flag[0] + channel_flag[1] + channel_flag[2] + channel_flag[3];
-	   			
-				//}while(sum < 4);
      	
-				cs_high(i);
-				DELAY(50); 
-				CLRWDT
+					cs_high(i);
+					DELAY(100); 
+
+					CLRWDT
+				}
+
+				for(i = 0;i < 4;i ++)
+				{
+					cs_low(i);
+			        DELAY(100); 
+					read_write_byte(0x10 + p);
+					read_write_byte(0x00);
+					read_write_byte(0x20 * p + 0x16);
+					cs_high(i);
+					DELAY(100); 
+				}
+				DELAY(1000);
+
 			}
 			capture_enable = 0;
 		}
